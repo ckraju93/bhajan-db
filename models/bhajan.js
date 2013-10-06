@@ -23,13 +23,13 @@ module.exports = {
     create: function (data, callback) {
 
     },
-    update: function (data) {
+    update: function (data, callback) {
 
     },
-    findOne: function (data) {
+    findOne: function (data, callback) {
 
     },
-    search: function (data) {
+    search: function (data, callback) {
 
     },
     serverConnect: serverConnect
