@@ -24,7 +24,8 @@ describe('Bhajan findOne', function (done) {
     });
 
     it('should not find more than one result.', function (next) {
-        // look up only one id
+        // what field should it be looking up on?
+        expect(result).to.not.be.an('array');
         next();
     });
 
@@ -36,7 +37,13 @@ describe('Bhajan findOne', function (done) {
     });
 
     after(function () {
-        done();
+        Bhajan.serverConnect('bhajans', function (client, bhajans) {
+            bhajans.remove({title: {$in: [unique_title_1, unique_title_2]}}, function (error, result) {
+                if (error) throw error;
+                client.close();
+                done();
+            });
+        });
     });
 });
 
