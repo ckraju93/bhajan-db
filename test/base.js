@@ -8,7 +8,6 @@ describe('app.js', function () {
     before(function (done) {
         http.createServer(app).listen(3000, function (error, server) {
             if (error) console.log(error);
-            console.log('Express server listening on port ' + app.get('port'));
             done();
         });
     });
