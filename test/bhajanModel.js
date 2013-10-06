@@ -10,19 +10,34 @@ describe('Bhajan create', function () {
 describe('Bhajan update', function () {
 });
 
-describe('Bhajan findOne', function () {
-    it('should be a function.', function () {
+describe('Bhajan findOne', function (done) {
+    var unique_title_1 = uuid.v4();
+    var unique_title_2 = uuid.v4();
+
+    before(function () {
+        // insert rows with both ids
+    });
+
+    it('should be a function.', function (next) {
         expect(Bhajan.findOne).to.be.a('function');
+        next();
     });
 
-    it('should not find more than one result.', function () {
-
+    it('should not find more than one result.', function (next) {
+        // look up only one id
+        next();
     });
 
-    it('should fail gracefully if there are no results.', function () {
+    it('should fail gracefully if there are no results.', function (next) {
         Bhajan.findOne({title: 'This bhajan doesn\'t exist'}, function (error, result) {
-            expect()
+            // throw an error or return empty result??
+            next();
         })
+    });
+
+    after(function () {
+        // delete both inserted rows.
+        done();
     });
 });
 
