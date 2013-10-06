@@ -36,7 +36,6 @@ describe('Bhajan findOne', function (done) {
     });
 
     after(function () {
-        // delete both inserted rows.
         done();
     });
 });
@@ -45,8 +44,15 @@ describe('Bhajan search', function (done) {
     var unique_title = uuid.v4();
 
     before(function () {
-        // insert 5 bhajans to db to search on.
-        // should have a unique string as title (node-uuid)
+        _.times(5, function () {
+            Bhajan.serverConnect('bhajans', function (client, bhajans) {
+                bhajans.insert({title: unique_title}}, function (error, result) {
+                    if (error) throw error;
+                    client.close();
+                    done();
+                });
+            });
+        })
     });
 
     it('should be a function.', function (next) {
@@ -70,8 +76,13 @@ describe('Bhajan search', function (done) {
     });
 
     after(function () {
-        // delete the bhajans with the uuid as title.
-        done();
+        Bhajan.serverConnect('bhajans', function (client, bhajans) {
+            bhajans.remove({title: unique_title}, function (error, result) {
+                if (error) throw error;
+                client.close();
+                done();
+            });
+        });
     });
 
 });
