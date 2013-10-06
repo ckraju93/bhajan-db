@@ -41,7 +41,7 @@ describe('Bhajan findOne', function (done) {
     });
 });
 
-describe('Bhajan search', function () {
+describe('Bhajan search', function (done) {
     var unique_title = uuid.v4();
 
     before(function () {
@@ -71,6 +71,7 @@ describe('Bhajan search', function () {
 
     after(function () {
         // delete the bhajans with the uuid as title.
+        done();
     });
 
 });
